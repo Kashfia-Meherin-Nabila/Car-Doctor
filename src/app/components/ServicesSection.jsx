@@ -1,4 +1,4 @@
-import dbConnect from "@/lib/db";
+import dbConnect, { collectionNamesObj } from "@/lib/db";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,7 +6,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 
 export default async function ServicesSection  ()  {
-  const data = await dbConnect("services").find({}).toArray();
+  const data = await dbConnect(collectionNamesObj.servicesCollection).find({}).toArray();
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-6">
       {data.map((item) => {
@@ -32,9 +32,9 @@ export default async function ServicesSection  ()  {
                   </p>
                 </div>
 
-                <button className="">
+                <Link href={`/services/${item._id}`}>
                   <FaArrowRight className="w-7 h-7 text-yellow-300 group-hover:text-white" />
-                </button>
+                </Link>
 
                 {/* <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all">
               View Details
