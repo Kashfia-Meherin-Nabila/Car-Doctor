@@ -3,12 +3,21 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
+import { poppins } from "../layout";
 
 
 export default async function ServicesSection  ()  {
   const data = await dbConnect(collectionNamesObj.servicesCollection).find({}).toArray();
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-6">
+    <>
+    <div>
+      <h1 className="pt-30 pb-5 font-bold text-5xl justify-center items-center text-center">Our Services</h1>
+      <p className={`${poppins.className} text-lg mb-8 max-w-2xl text-center mx-auto`}>
+          High-quality services, expert technicians, and seamless customer experience.
+        </p>
+
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pb-40 w-280 mx-auto gap-6">
       {data.map((item) => {
         return (
           <div key={item._id}>
@@ -23,11 +32,11 @@ export default async function ServicesSection  ()  {
 
               <div className="flex place-content-between p-4" >
                 <div className=" flex flex-col">
-                  <h3 className="text-lg font-semibold text-gray-800">
+                  <h3 className={`${poppins.className} text-lg font-semibold text-gray-800`}>
                     {item.title}
                   </h3>
 
-                  <p className="text-md text-gray-600 mt-1 flex flex-col">
+                  <p className={`${poppins.className} text-md text-gray-600 mt-1 flex flex-col`}>
                     {item.price}
                   </p>
                 </div>
@@ -45,7 +54,9 @@ export default async function ServicesSection  ()  {
         );
       })}
     </div>
+    </>
   );
 };
+
 
 // export default ServicesSection;
